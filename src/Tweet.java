@@ -1,5 +1,6 @@
 public class Tweet {
 
+    // Chaque tweet possède un attribut "body" contenant un message
     private String body;
 
     public Tweet(String body){

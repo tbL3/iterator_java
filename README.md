@@ -1,2 +1,2 @@
-# iterator_java
-Code du sujet d'exposé sur le iterator pattern en java
+# Exposé design patterns
+Code du sujet d'exposé sur le <u>iterator pattern</u> en java
