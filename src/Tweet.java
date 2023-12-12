@@ -1,15 +1,9 @@
-public class Tweet extends Post {
+public class Tweet {
 
-    private String title;
     private String body;
 
-    public Tweet(String title, String body){
-        this.title = title;
+    public Tweet(String body){
         this.body = body;
-    }
-
-    public String getTitle() {
-        return title;
     }
 
     public String getBody() {
@@ -18,6 +12,6 @@ public class Tweet extends Post {
 
     @Override
     public String toString() {
-        return String.format("Title : %s\n%s", this.title, this.body);
+        return this.getBody();
     }
 }

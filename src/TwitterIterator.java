@@ -5,17 +5,24 @@ public class TwitterIterator implements PostIterator {
 
     private Tweet tweet;
 
+    private TweetCollection tweetCollection;
+
     private int position = 0;
 
-    private List<Tweet> tweets = new ArrayList<>();
-
-    @Override
-    public boolean hasNext() {
-        return false;
+    public TwitterIterator(TweetCollection tweetCollection){
+        this.tweetCollection = tweetCollection;
     }
 
     @Override
-    public Post getNext() {
+    public boolean hasNext() {
+        return this.position < tweetCollection.getSize();
+    }
+
+    @Override
+    public Object getNext() {
+        if(this.hasNext()){
+            return tweetCollection.getCollection().get(position++);
+        }
         return null;
     }
 }
