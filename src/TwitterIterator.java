@@ -1,9 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
-
 public class TwitterIterator implements PostIterator {
-
-    private Tweet tweet;
 
     private TweetCollection tweetCollection;
 
