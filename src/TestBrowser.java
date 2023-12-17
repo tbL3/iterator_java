@@ -1,35 +1,58 @@
 public class TestBrowser {
 
+
     public static void main(String[] args) {
-        PostCollection tweetCollection1 = new TweetCollection();
+        // Création des utilisateurs
+        User user1 = new User("Alice");
+        User user2 = new User("Bob");
+        User user3 = new User("Charlie");
 
-        tweetCollection1.add(new Tweet("LOL"));
-        tweetCollection1.add(new Tweet("MDR"));
-        tweetCollection1.add(new Tweet("TEST"));
-        tweetCollection1.add(new Tweet("JEAN NAIMAR"));
-        tweetCollection1.add(new Tweet("18H30 !"));
-        tweetCollection1.add(new Tweet("Taritolemalibarte ?"));
-        tweetCollection1.add(new Tweet("Tarte ?"));
-        tweetCollection1.add(new Tweet("J'aime mieux ça."));
+        // Création des tweets
+        user1.createTextTweet("Bonjour, ceci est un tweet textuel !");
+        user2.createImageTweet(1920, 1080);
+        user3.createVideoTweet("http://exemple.com/video");
 
-        for(PostIterator iter = tweetCollection1.createIterator(); iter.hasNext();){
-            System.out.println(iter.getNext());
+        TweetCollection tweetCollection = new TweetCollection();
+        for (Tweet tweet : user1.getTweets()) {
+            tweetCollection.add(tweet);
+        }
+        for (Tweet tweet : user2.getTweets()) {
+            tweetCollection.add(tweet);
+        }
+        for (Tweet tweet : user3.getTweets()) {
+            tweetCollection.add(tweet);
         }
 
-        System.out.println("-----");
-
-        PostIterator iter2 = tweetCollection1.createIterator();
-
-        while(iter2.hasNext()){
-            System.out.println(iter2.getNext());
+        // Parcourir et afficher les tweets
+        PostIterator<Tweet> tweetIterator = tweetCollection.createIterator();
+        while (tweetIterator.hasNext()) {
+            Tweet tweet = (Tweet) tweetIterator.getNext();
+            tweet.display();
         }
 
-        System.out.println("-----");
+        // Création de commentaires et de réponses
+        CommentaireCollection commentaireCollection = new CommentaireCollection();
+        Commentaire commentaire1 = new Commentaire(user1, "Ceci est un commentaire.");
+        Commentaire reponse1 = new Commentaire(user2, "Ceci est une réponse.");
+        commentaire1.addReponse(reponse1);
+        commentaireCollection.add(commentaire1);
 
-        iter2.reset(); // L'iterator est bien réinitialisé
+        // Parcourir et afficher les commentaires (DFS)
+        PostIterator<Commentaire> commentaireIteratorDFS = commentaireCollection.createIterator();
+        System.out.println("Parcours DFS des commentaires :");
+        while (commentaireIteratorDFS.hasNext()) {
+            Commentaire commentaire = (Commentaire) commentaireIteratorDFS.getNext();
+            System.out.println(commentaire.getBody());
+        }
 
-        while(iter2.hasNext()){
-            System.out.println(iter2.getNext());
+        // Parcourir et afficher les commentaires (BFS)
+        PostIterator<Commentaire> commentaireIteratorBFS = commentaireCollection.createIteratorBFS();
+        System.out.println("Parcours BFS des commentaires :");
+        while (commentaireIteratorBFS.hasNext()) {
+            Commentaire commentaire = (Commentaire) commentaireIteratorBFS.getNext();
+            System.out.println(commentaire.getBody());
         }
     }
 }
+    
+

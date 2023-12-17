@@ -1,9 +1,11 @@
-public class Tweet {
+public abstract class Tweet {
 
     // Chaque tweet possède un attribut "body" contenant un message
     private String body;
+    private User user;
 
-    public Tweet(String body){
+    public Tweet(User user, String body){
+        this.user = user;
         this.body = body;
     }
 
@@ -11,8 +13,10 @@ public class Tweet {
         return body;
     }
 
-    @Override
+    @Override 
     public String toString() {
-        return this.getBody();
+        return body;
     }
+
+    public abstract void display();
 }

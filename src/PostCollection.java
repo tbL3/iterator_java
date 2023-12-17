@@ -1,8 +1,5 @@
-public interface PostCollection {
-
+public interface PostCollection<T> {
     int getSize();
-
-    boolean add(Object newPost);
-
-    PostIterator createIterator();
+    boolean add(T newPost);
+    PostIterator<T> createIterator();
 }

@@ -1,4 +1,4 @@
-public interface PostIterator {
+public interface PostIterator<T> {
 
     /**
      * Doit renvoyer si oui ou non l'iterator peut passer
